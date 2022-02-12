@@ -9,19 +9,19 @@ interface IClockProps {
 
 export const Clock = (props: IClockProps) => {
   const { theme } = useThemeContext();
-  const [timeDisplay, setTimeDisplay] = useState<string>("99:99:99 PM");
+  const [timeDisplay, setTimeDisplay] = useState<string>("--:--:-- PM");
 
   const timeConverter = (date: Date, timeZone: string) => {
     return new Date(date).toLocaleTimeString("en-US", { timeZone: timeZone });
   };
 
-  // useEffect(() => {
-  //   const tickEverySecond: NodeJS.Timer = setInterval(
-  //     () => setTimeDisplay(timeConverter(new Date(), props.timeZone as string)),
-  //     1000
-  //   );
-  //   return () => clearInterval(tickEverySecond);
-  // });
+  useEffect(() => {
+    const tickEverySecond: NodeJS.Timer = setInterval(
+      () => setTimeDisplay(timeConverter(new Date(), props.timeZone as string)),
+      1000
+    );
+    return () => clearInterval(tickEverySecond);
+  });
 
   return (
     <div
