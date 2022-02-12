@@ -9,25 +9,25 @@ interface IClockProps {
 
 export const Clock = (props: IClockProps) => {
   const { theme } = useThemeContext();
-  const [timeDisplay, setTimeDisplay] = useState<string>("--:--:-- PM");
+  const [timeDisplay, setTimeDisplay] = useState<string>("99:99:99 PM");
 
-  const timeConveter = (date: Date, timeZone: string) => {
+  const timeConverter = (date: Date, timeZone: string) => {
     return new Date(date).toLocaleTimeString("en-US", { timeZone: timeZone });
   };
 
-  useEffect(() => {
-    const tickEverySecond: NodeJS.Timer = setInterval(
-      () => setTimeDisplay(timeConveter(new Date(), props.timeZone as string)),
-      1000
-    );
-    return () => clearInterval(tickEverySecond);
-  });
+  // useEffect(() => {
+  //   const tickEverySecond: NodeJS.Timer = setInterval(
+  //     () => setTimeDisplay(timeConverter(new Date(), props.timeZone as string)),
+  //     1000
+  //   );
+  //   return () => clearInterval(tickEverySecond);
+  // });
 
   return (
     <div
-      className={`card  d-flex justify-content-center ${theme.card} ${theme.text} align-items-center shadow`}
+      className={`card d-flex justify-content-center ${theme.card} ${theme.text} align-items-center shadow`}
     >
-      <div className="card-body p-5 d-flex flex-column align-items-center">
+      <div className="card-body d-flex flex-column justify-content-center align-items-center">
         <h1 className="my-time mb-0">{timeDisplay}</h1>
         <label htmlFor="">{props.label}</label>
       </div>

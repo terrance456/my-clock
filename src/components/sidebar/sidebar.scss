@@ -1,0 +1,28 @@
+.sidebar {
+  .sidebar-content {
+    z-index: 10;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    height: calc(100vh - 83.23px);
+    width: 400px;
+    padding: 1rem 1.5rem;
+    transform: translateX(100%);
+    transition: all 0.8s ease;
+    opacity: 0;
+    .sidebar-body {
+    }
+  }
+  .open-sidebar {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.8s ease;
+  }
+}
+
+.sidebar-toggle {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  display: flex;
+  cursor: pointer;
+}

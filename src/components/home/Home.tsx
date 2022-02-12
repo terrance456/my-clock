@@ -13,20 +13,20 @@ export const Home = () => {
 
   return (
     <div
-      className={`container-fluid d-flex align-items-center h-100 ${theme.bgBody} my-home-container`}
+      className={`container-fluid p-2 h-100 ${theme.bgBody} my-home-container`}
     >
-      <div className="container d-flex align-items-center my-home">
-        <div className="row gap-4 justify-content-center">
+      <div className="container my-home">
+        <div className="row gap-lg-4 gap-0 justify-content-center">
           <div className="row">
             {firstRowTimeZone.map((value: ITimeZone, index: number) => (
-              <div className="col" key={index}>
+              <div className="col-lg-4 col-12 mb-4 mb-lg-0" key={index}>
                 <Clock timeZone={value.timeZone} label={value.label} />
               </div>
             ))}
           </div>
           <div className="row">
             {secondRowTimeZone.map((value: ITimeZone, index: number) => (
-              <div className="col" key={index}>
+              <div className="col-lg-6 col-12 mb-4 mb-lg-0" key={index}>
                 <Clock timeZone={value.timeZone} label={value.label} />
               </div>
             ))}

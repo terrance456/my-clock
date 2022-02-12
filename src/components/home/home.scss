@@ -8,4 +8,13 @@
 
 .my-home-container {
   transition: background-color 0.5s;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .container {
+    margin: auto;
+    width: 100%;
+  }
 }

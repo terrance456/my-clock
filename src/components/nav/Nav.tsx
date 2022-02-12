@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useThemeContext } from "../../context/ThemeContext";
-import { IoMdClock } from "react-icons/io";
 import "./nav.scss";
+import Sidebar from "../sidebar/Sidebar";
 
 const Nav = () => {
   const { theme, setTheme } = useThemeContext();
@@ -50,29 +50,30 @@ const Nav = () => {
     <nav className={`navbar navbar-expand-lg px-3 ${theme.nav} ${theme.text}`}>
       <div className="container-fluid">
         <div className="navbar-brand">
-          <div className="row align-items-center">
-            <div className="col">
-              <div className="row">
-                <h2 className="mb-0">Clocky</h2>
-                <small>keep time in control</small>
-              </div>
+          <div className="row align-items-center ">
+            <div className="col d-flex flex-column">
+              <h2 className="mb-0">Clocky</h2>
+              <small>keep time in control</small>
             </div>
           </div>
         </div>
-        <div className="form-check form-switch">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="flexSwitchCheckDefault"
-            onChange={toggle}
-            checked={checkedBox}
-          />
-          <label
-            className={`form-check-label ${theme.text}`}
-            htmlFor="flexSwitchCheckDefault"
-          >
-            Theme mode
-          </label>
+        <div className="nav-tools">
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="flexSwitchCheckDefault"
+              onChange={toggle}
+              checked={checkedBox}
+            />
+            <label
+              className={`form-check-label ${theme.text}`}
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Theme mode
+            </label>
+          </div>
+          <Sidebar />
         </div>
       </div>
     </nav>
