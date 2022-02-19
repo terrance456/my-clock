@@ -26,6 +26,7 @@ const Nav = () => {
       text: "text-light",
       nav: "bg-dark",
       card: "bg-dark",
+      countryCard: "country-card-bg-dark",
     });
     setcheckedBox(true);
     localStorage.setItem("theme", "dark");
@@ -37,6 +38,7 @@ const Nav = () => {
       text: "text-dark",
       nav: "bg-light",
       card: "bg-white",
+      countryCard: "country-card-bg-light",
     });
     setcheckedBox(false);
     localStorage.setItem("theme", "light");
@@ -59,17 +61,8 @@ const Nav = () => {
         </div>
         <div className="nav-tools">
           <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexSwitchCheckDefault"
-              onChange={toggle}
-              checked={checkedBox}
-            />
-            <label
-              className={`form-check-label ${theme.text}`}
-              htmlFor="flexSwitchCheckDefault"
-            >
+            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onChange={toggle} checked={checkedBox} />
+            <label className={`form-check-label ${theme.text}`} htmlFor="flexSwitchCheckDefault">
               Theme mode
             </label>
           </div>

@@ -1,10 +1,5 @@
 import { useThemeContext } from "../../context/ThemeContext";
-import {
-  firstRowTimeZone,
-  ITimeZone,
-  secondRowTimeZone,
-  thirdRowTimeZone,
-} from "../../mocks/TimeZone";
+import { firstRowTimeZone, ITimeZone, secondRowTimeZone, thirdRowTimeZone } from "../../mocks/TimeZone";
 import Clock from "../clock/Clock";
 import "./home.scss";
 
@@ -12,9 +7,7 @@ export const Home = () => {
   const { theme } = useThemeContext();
 
   return (
-    <div
-      className={`container-fluid p-2 h-100 ${theme.bgBody} my-home-container`}
-    >
+    <div className={`container-fluid p-2 h-100 ${theme.bgBody} my-home-container`}>
       <div className="container my-home">
         <div className="row gap-lg-4 gap-0 justify-content-center">
           <div className="row">

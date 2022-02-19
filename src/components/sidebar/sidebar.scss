@@ -1,22 +1,69 @@
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
 .sidebar {
   .sidebar-content {
+    overflow: hidden;
     z-index: 10;
     position: absolute;
     top: 100%;
     right: 0;
     height: calc(100vh - 83.23px);
-    width: 400px;
+    width: 350px;
     padding: 1rem 1.5rem;
     transform: translateX(100%);
-    transition: all 0.8s ease;
+    transition: all 0.5s ease;
     opacity: 0;
-    .sidebar-body {
+    display: flex;
+    flex-direction: column;
+    > .country-card-container {
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 1rem;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .country-card-bg-dark {
+        background-color: $gray-800;
+      }
+      .country-card-bg-light {
+        background-color: $white;
+      }
+
+      > :first-child {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      }
+      > :not(:first-child) {
+        margin: 0.5rem 0;
+      }
+
+      .card {
+        cursor: pointer;
+        &:hover {
+          color: $blue;
+          transition: color 0.3s ease;
+        }
+      }
+    }
+
+    @include media-breakpoint-down(md) {
+      width: 100%;
     }
   }
   .open-sidebar {
     transform: translateX(0);
     opacity: 1;
-    transition: all 0.8s ease;
+    transition: all 0.5s ease;
   }
 }
 
