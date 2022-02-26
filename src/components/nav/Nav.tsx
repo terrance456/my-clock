@@ -16,7 +16,6 @@ const Nav = () => {
       }
     } else {
       localStorage.setItem("theme", "light");
-      console.log("empty");
     }
   }, []);
 
