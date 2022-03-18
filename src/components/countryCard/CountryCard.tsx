@@ -1,8 +1,8 @@
 import React from "react";
 import { useThemeContext } from "../../context/ThemeContext";
-import { FcGlobe } from "react-icons/fc";
+import { GoGlobe } from "react-icons/go";
 import "./country-card.scss";
-import { timeConverter } from "../../helperFunctions/helperFunction";
+import { useTimeModalContext } from "../../context/TimeModalContext";
 
 interface CountryCardProps {
   countryName?: string;
@@ -11,9 +11,11 @@ interface CountryCardProps {
 
 export const CountryCard: React.FC<CountryCardProps> = ({ countryName, timeZone }: CountryCardProps) => {
   const { theme } = useThemeContext();
+  const { setToggleModal, setTimeDetails } = useTimeModalContext();
 
   const onClickCard = () => {
-    console.log(timeConverter(new Date(), timeZone as string));
+    setToggleModal(true);
+    setTimeDetails({ label: countryName, timeZone });
   };
 
   return (
@@ -21,7 +23,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ countryName, timeZone 
       <div className="card-body ">
         <div className="row d-flex align-items-center">
           <div className="col-2">
-            <FcGlobe />
+            <GoGlobe />
           </div>
           <div className="col-10">{countryName}</div>
         </div>

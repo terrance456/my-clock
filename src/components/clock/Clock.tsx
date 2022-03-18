@@ -3,7 +3,7 @@ import { useThemeContext } from "../../context/ThemeContext";
 import { timeConverter } from "../../helperFunctions/helperFunction";
 import "./clock.scss";
 
-interface IClockProps {
+export interface IClockProps {
   timeZone?: string;
   label?: string;
 }
