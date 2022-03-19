@@ -9,7 +9,7 @@ export const Home = () => {
   return (
     <div className={`container-fluid p-2 h-100 ${theme.bgBody} my-home-container`}>
       <div className="container my-home">
-        <div className="row gap-lg-4 gap-0 justify-content-center">
+        <div className="row gap-lg-4 gap-0 justify-content-center mb-my-0 my-3 ">
           <div className="row">
             {firstRowTimeZone.map((value: ITimeZone, index: number) => (
               <div className="col-lg-4 col-12 mb-4 mb-lg-0" key={index}>

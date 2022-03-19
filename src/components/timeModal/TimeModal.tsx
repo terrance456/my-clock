@@ -10,7 +10,7 @@ export const TimeModal = () => {
       <div className="time-modal-backdrop" onClick={() => setToggleModal(false)} />
       <div className="time-modal-content ">
         <Clock label={timeDetails.label} timeZone={timeDetails.timeZone} />
-        <button className="btn btn-outline-primary" onClick={() => setToggleModal(false)}>
+        <button className="btn btn-primary" onClick={() => setToggleModal(false)}>
           close
         </button>
       </div>

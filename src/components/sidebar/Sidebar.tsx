@@ -34,7 +34,14 @@ export const Sidebar = () => {
   };
 
   const sidebarRef: React.RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
-  useOnOutsideClick(sidebarRef, () => setOpenSidebar(false));
+
+  const closeSidebar = (event: MouseEvent) => {
+    if (!document.querySelector(".time-modal")?.contains(event.target as HTMLElement)) {
+      setOpenSidebar(false);
+    }
+  };
+
+  useOnOutsideClick(sidebarRef, closeSidebar);
 
   const countryNameInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCountryNameInput(event.target.value);
