@@ -17,8 +17,8 @@ interface CountryDetails {
 export const Sidebar = () => {
   const { theme } = useThemeContext();
   const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
-  const [countries, setCountries] = React.useState<CountryDetails[]>();
-  const [newCountries, setNewCountries] = React.useState<CountryDetails[]>();
+  const [countries, setCountries] = React.useState<CountryDetails[]>([]);
+  const [newCountries, setNewCountries] = React.useState<CountryDetails[]>([]);
   const [splitData, setSplitData] = React.useState<Array<any>>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [countryNameInput, setCountryNameInput] = React.useState<string>("");
@@ -38,6 +38,7 @@ export const Sidebar = () => {
   const closeSidebar = (event: MouseEvent) => {
     if (!document.querySelector(".time-modal")?.contains(event.target as HTMLElement)) {
       setOpenSidebar(false);
+      setScrollCount(1);
     }
   };
 
@@ -47,21 +48,23 @@ export const Sidebar = () => {
     setCountryNameInput(event.target.value);
     if (event.target.value === "") {
       setNewCountries(splitData[0]);
+      setScrollCount(1);
     } else {
       filterCountryName(event.target.value);
     }
   };
+  console.log(newCountries.length);
 
   const filterCountryName = (name: string) => {
     setNewCountries(countries?.filter((value: CountryDetails) => value.searchLabel.toLowerCase().includes(name.toLowerCase())));
   };
 
   const loadOnScroll = () => {
-    if (scrollCount <= splitData.length - 1) {
+    if (newCountries?.length <= countries?.length && scrollCount < splitData.length) {
       const newData: CountryDetails[] = newCountries?.concat(splitData[scrollCount]) as CountryDetails[];
       setNewCountries(newData);
+      setScrollCount(scrollCount + 1);
     }
-    setScrollCount(scrollCount + 1);
   };
 
   DetectScrollEnd(sideBarScrollRef, loadOnScroll);

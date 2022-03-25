@@ -17,7 +17,7 @@ export const formatDataCountryLabels = (data: string[]) => {
 export const splitDataIntoChunks = (data: string[], chunkSize: number) => {
   const formattedData: CountryDetails[] = formatDataCountryLabels(data);
   let newData: any = [];
-  for (let i: number = 0; i <= formattedData.length; i += chunkSize) {
+  for (let i: number = 0; i < formattedData.length; i += chunkSize) {
     newData.push(formattedData.slice(i, i + chunkSize));
   }
   return newData;
