@@ -27,6 +27,7 @@ export const Sidebar = () => {
 
   const toggleSidebar = () => {
     setOpenSidebar(!openSidebar);
+    !openSidebar && setScrollCount(1);
   };
 
   const onSubmit = (event: React.FormEvent) => {
