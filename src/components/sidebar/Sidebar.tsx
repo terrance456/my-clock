@@ -54,7 +54,6 @@ export const Sidebar = () => {
       filterCountryName(event.target.value);
     }
   };
-  console.log(newCountries.length);
 
   const filterCountryName = (name: string) => {
     setNewCountries(countries?.filter((value: CountryDetails) => value.searchLabel.toLowerCase().includes(name.toLowerCase())));
