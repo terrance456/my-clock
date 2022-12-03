@@ -1,0 +1,27 @@
+@mixin country-list-container() {
+  .country-card-container {
+    overflow-y: auto;
+    .country-card-bg-dark {
+      background-color: $gray-800;
+    }
+    .country-card-bg-light {
+      background-color: $white;
+    }
+
+    > :first-child {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    > :not(:first-child) {
+      margin: 0.5rem 0;
+    }
+
+    .card {
+      cursor: pointer;
+      &:hover {
+        color: $blue;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}
