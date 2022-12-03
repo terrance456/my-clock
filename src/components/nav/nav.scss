@@ -13,9 +13,15 @@ nav {
       display: flex;
       align-items: center;
       .form-check {
+        margin-bottom: 0;
         input {
           cursor: pointer;
         }
+      }
+      .setting-icon {
+        font-size: 1.2rem;
+        margin-left: 1rem;
+        cursor: pointer;
       }
     }
   }
