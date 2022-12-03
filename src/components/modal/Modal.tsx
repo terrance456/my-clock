@@ -6,6 +6,7 @@ import "./modal.scss";
 export interface ModalProps {
   toggle?: boolean;
   onModalClose: () => void;
+  className?: string;
 }
 
 const Modal: React.FC<ModalProps> = (props: React.PropsWithChildren<ModalProps>) => {
@@ -13,9 +14,9 @@ const Modal: React.FC<ModalProps> = (props: React.PropsWithChildren<ModalProps>)
 
   const renderModal = () => {
     return (
-      <div className="custom-modal">
+      <div className={`custom-modal ${!!props.className ? props.className : ""}`}>
         <div className="custom-modal-overlay" onClick={props.onModalClose}></div>
-        <div className={`custom-modal-content ${theme.bgBody} ${theme.text}`}>{props.children}</div>
+        <div className={`custom-modal-content ${theme.nav} ${theme.text}`}>{props.children}</div>
       </div>
     );
   };
