@@ -1,9 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import React from "react";
+import { ClockListRowType } from "../components/ClockList/ClockList";
+import { useLocalStorage } from "../hooks/localStorage";
+import { firstRowTimeZone, secondRowTimeZone, thirdRowTimeZone } from "../mocks/TimeZone";
 
 interface GlobalSettingContextReturnType {
   countryList: string[];
   isFetchingCountryList: boolean;
+  defaultHomeTimezone: ClockListRowType;
+  storeHomeTimezoneData: (data: string | ClockListRowType) => void;
 }
 
 const GlobalSettingContext = React.createContext<GlobalSettingContextReturnType>({} as GlobalSettingContextReturnType);
@@ -15,6 +20,9 @@ export const useGlobalSettingContext = () => {
 export const GlobalSettingProvider = ({ children }: React.PropsWithChildren<any>) => {
   const [countryList, setCountryList] = React.useState<string[]>([]);
   const [isFetchingCountryList, setIsFetchingCountryList] = React.useState<boolean>(true);
+  const [defaultHomeTimezone, setDefaultHomeTimezone] = React.useState<ClockListRowType>({ firstRow: firstRowTimeZone, secondRow: secondRowTimeZone, thirdRow: thirdRowTimeZone });
+
+  const { localStorageData, storeData } = useLocalStorage("preference-clock-list", true);
 
   React.useEffect(() => {
     axios
@@ -25,5 +33,15 @@ export const GlobalSettingProvider = ({ children }: React.PropsWithChildren<any>
       .finally(() => setIsFetchingCountryList(false));
   }, []);
 
-  return <GlobalSettingContext.Provider value={{ countryList, isFetchingCountryList }}>{children}</GlobalSettingContext.Provider>;
+  React.useEffect(() => {
+    if (localStorageData) {
+      setDefaultHomeTimezone(localStorageData as ClockListRowType);
+      return;
+    }
+    setDefaultHomeTimezone({ firstRow: firstRowTimeZone, secondRow: secondRowTimeZone, thirdRow: thirdRowTimeZone });
+  }, [localStorageData]);
+
+  return (
+    <GlobalSettingContext.Provider value={{ countryList, isFetchingCountryList, defaultHomeTimezone, storeHomeTimezoneData: storeData }}>{children}</GlobalSettingContext.Provider>
+  );
 };
