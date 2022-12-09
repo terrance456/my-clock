@@ -51,6 +51,16 @@ $modal-width: 400px;
       button {
         margin-left: 1rem;
       }
+      @include media-breakpoint-down(sm) {
+        justify-content: space-between;
+        :first-child {
+          margin-right: 1.5rem;
+        }
+        button {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
     }
     @include media-breakpoint-down(sm) {
       width: 100%;
