@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useThemeContext } from "../../context/ThemeContext";
 import "./nav.scss";
 import Sidebar from "../sidebar/Sidebar";
+import { IoMdSettings } from "react-icons/io";
+import { usePreferenceSettingContext } from "../../context/PreferenceSettingContext";
 
 const Nav = () => {
   const { theme, setTheme } = useThemeContext();
+  const { toggleSettingModal } = usePreferenceSettingContext();
   const [checkedBox, setcheckedBox] = useState<boolean>(false);
 
   useEffect(() => {
@@ -65,6 +68,7 @@ const Nav = () => {
               Theme mode
             </label>
           </div>
+          <IoMdSettings className="setting-icon" onClick={() => toggleSettingModal(true)} />
           <Sidebar />
         </div>
       </div>

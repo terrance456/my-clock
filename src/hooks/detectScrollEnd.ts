@@ -5,7 +5,7 @@ export const DetectScrollEnd = <T extends HTMLElement>(ref: React.RefObject<T>, 
     if (ref?.current) {
       const currentRef: T = ref.current;
       const listener = () => {
-        if (currentRef && Math.round(currentRef.offsetHeight + currentRef.scrollTop) >= currentRef.scrollHeight) {
+        if (currentRef && Math.round(currentRef.offsetHeight + currentRef.scrollTop + 100) >= currentRef.scrollHeight) {
           callBack();
         }
       };

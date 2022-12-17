@@ -4,6 +4,9 @@ import "./index.scss";
 import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./components/home/Home";
 import { TimeModalProvider } from "./context/TimeModalContext";
+import Modal from "./components/modal/Modal";
+import { PreferenceSettingProvider } from "./context/PreferenceSettingContext";
+import { GlobalSettingProvider } from "./context/GlobalSettingContext";
 
 const App: React.FC = () => {
   return (
@@ -14,10 +17,14 @@ const App: React.FC = () => {
     //   </Routes>
     // </Router>
     <ThemeProvider>
-      <TimeModalProvider>
-        <Nav />
-        <Home />
-      </TimeModalProvider>
+      <GlobalSettingProvider>
+        <TimeModalProvider>
+          <PreferenceSettingProvider>
+            <Nav />
+            <Home />
+          </PreferenceSettingProvider>
+        </TimeModalProvider>
+      </GlobalSettingProvider>
     </ThemeProvider>
   );
 };

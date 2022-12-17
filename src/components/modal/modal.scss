@@ -1,0 +1,91 @@
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../../mixins.scss";
+
+$modal-width: 400px;
+
+.custom-modal {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  > .custom-modal-overlay {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: modal-overlay-animate 0.4s;
+  }
+  > .custom-modal-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: $modal-width;
+    display: flex;
+    flex-direction: column;
+    animation: modal-slide-out-animate 0.4s;
+    > .custom-modal-header {
+      border-bottom: 1px solid $gray-300;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > svg {
+        margin-left: 1rem;
+        height: 1.2rem;
+        width: 1.2rem;
+        cursor: pointer;
+      }
+    }
+    > .custom-modal-body {
+      height: 100%;
+      padding: 1rem;
+      overflow-y: auto;
+      @include custom-scroll-bar();
+    }
+    > .custom-modal-footer {
+      border-top: 1px solid $gray-300;
+      padding: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      button {
+        margin-left: 1rem;
+      }
+      @include media-breakpoint-down(sm) {
+        justify-content: space-between;
+        :first-child {
+          margin-right: 1.5rem;
+        }
+        button {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes modal-slide-out-animate {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes modal-overlay-animate {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

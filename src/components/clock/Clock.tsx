@@ -15,7 +15,7 @@ export const Clock = (props: IClockProps) => {
   useEffect(() => {
     const tickEverySecond: NodeJS.Timer = setInterval(() => setTimeDisplay(timeConverter(new Date(), props.timeZone as string)), 1000);
     return () => clearInterval(tickEverySecond);
-  });
+  }, [props]);
 
   return (
     <div className={`card d-flex justify-content-center ${theme.card} ${theme.text} align-items-center shadow clock-card `}>

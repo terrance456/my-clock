@@ -7,17 +7,21 @@ import { useTimeModalContext } from "../../context/TimeModalContext";
 interface CountryCardProps {
   countryName?: string;
   timeZone?: string;
+  onClickCountryCard?: () => void;
 }
 
-export const CountryCard: React.FC<CountryCardProps> = ({ countryName, timeZone }: CountryCardProps) => {
+export const CountryCard: React.FC<CountryCardProps> = ({ countryName, timeZone, onClickCountryCard }: CountryCardProps) => {
   const { theme } = useThemeContext();
   const { setToggleModal, setTimeDetails } = useTimeModalContext();
 
   const onClickCard = () => {
+    if (!!onClickCountryCard) {
+      onClickCountryCard();
+      return;
+    }
     setToggleModal(true);
     setTimeDetails({ label: countryName, timeZone });
   };
-
   return (
     <div className={`card ${theme.countryCard} country-card col-12`} onClick={onClickCard}>
       <div className="card-body ">

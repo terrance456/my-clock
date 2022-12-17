@@ -4,23 +4,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useThemeContext } from "../../context/ThemeContext";
 import { useOnOutsideClick } from "../../hooks/outsideCLick";
 import CountryCard from "../countryCard/CountryCard";
-import axios, { AxiosResponse } from "axios";
 import { formatDataCountryLabels, splitDataIntoChunks } from "../../utils";
 import { DetectScrollEnd } from "../../hooks/detectScrollEnd";
-
-interface CountryDetails {
-  timeZone: string;
-  label: string;
-  searchLabel: string;
-}
+import { useGlobalSettingContext } from "../../context/GlobalSettingContext";
+import { CountryDetails } from "../../types/CountryDetails.type";
 
 export const Sidebar = () => {
   const { theme } = useThemeContext();
+  const { countryList, isFetchingCountryList } = useGlobalSettingContext();
   const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
   const [countries, setCountries] = React.useState<CountryDetails[]>([]);
   const [newCountries, setNewCountries] = React.useState<CountryDetails[]>([]);
   const [splitData, setSplitData] = React.useState<Array<any>>([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [countryNameInput, setCountryNameInput] = React.useState<string>("");
   const sideBarScrollRef: React.RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
   const [scrollCount, setScrollCount] = React.useState<number>(1);
@@ -54,7 +49,6 @@ export const Sidebar = () => {
       filterCountryName(event.target.value);
     }
   };
-  console.log(newCountries.length);
 
   const filterCountryName = (name: string) => {
     setNewCountries(countries?.filter((value: CountryDetails) => value.searchLabel.toLowerCase().includes(name.toLowerCase())));
@@ -77,19 +71,14 @@ export const Sidebar = () => {
       setNewCountries([]);
       setSplitData([]);
     } else {
-      axios
-        .get("countryTimeZone.json")
-        .then((res: AxiosResponse<any>) => {
-          setCountries(formatDataCountryLabels(res.data.allTimeZone));
-          setSplitData(splitDataIntoChunks(res.data.allTimeZone, 20));
-          setNewCountries(splitDataIntoChunks(res.data.allTimeZone, 20)[0]);
-        })
-        .finally(() => setIsLoading(false));
+      setCountries(formatDataCountryLabels(countryList));
+      setSplitData(splitDataIntoChunks(countryList, 20));
+      setNewCountries(splitDataIntoChunks(countryList, 20)[0]);
     }
-  }, [openSidebar]);
+  }, [openSidebar, countryList]);
 
   const countryBodyContent = () => {
-    if (isLoading) {
+    if (isFetchingCountryList) {
       return <label htmlFor="">Loading</label>;
     }
     return (
@@ -117,7 +106,7 @@ export const Sidebar = () => {
             value={countryNameInput}
             onChange={countryNameInputOnChange}
             placeholder="Eg: Kuala Lumpur"
-            disabled={isLoading}
+            disabled={isFetchingCountryList}
           />
         </form>
         {openSidebar && countryBodyContent()}
