@@ -55,6 +55,7 @@ const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: Pr
     if (pickedTimezone.length === 6) {
       const restructurePickedTimezone: ClockListRowType = { firstRow: pickedTimezone.slice(0, 3), secondRow: pickedTimezone.slice(3, 5), thirdRow: pickedTimezone.slice(5) };
       storeHomeTimezoneData(restructurePickedTimezone);
+      props.onModalClose();
       return;
     }
   };
