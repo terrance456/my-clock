@@ -7,12 +7,7 @@ import CountryCard from "../countryCard/CountryCard";
 import { formatDataCountryLabels, splitDataIntoChunks } from "../../utils";
 import { DetectScrollEnd } from "../../hooks/detectScrollEnd";
 import { useGlobalSettingContext } from "../../context/GlobalSettingContext";
-
-interface CountryDetails {
-  timeZone: string;
-  label: string;
-  searchLabel: string;
-}
+import { CountryDetails } from "../../types/CountryDetails.type";
 
 export const Sidebar = () => {
   const { theme } = useThemeContext();

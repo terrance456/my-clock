@@ -1,12 +1,12 @@
 import React from "react";
 import { useThemeContext } from "../../context/ThemeContext";
-import { ITimeZone } from "../../mocks/TimeZone";
+import { CountryDetails } from "../../types/CountryDetails.type";
 import Clock from "../clock/Clock";
 
 export interface ClockListRowType {
-  firstRow: ITimeZone[];
-  secondRow: ITimeZone[];
-  thirdRow: ITimeZone[];
+  firstRow: CountryDetails[];
+  secondRow: CountryDetails[];
+  thirdRow: CountryDetails[];
 }
 
 interface ClockListProps {
@@ -21,21 +21,21 @@ const ClockList: React.FC<ClockListProps> = ({ list }) => {
       <div className="container my-home">
         <div className="row gap-lg-4 gap-0 justify-content-center mb-my-0 my-3 ">
           <div className="row">
-            {list?.firstRow?.map((value: ITimeZone, index: number) => (
+            {list?.firstRow?.map((value: CountryDetails, index: number) => (
               <div className="col-lg-4 col-12 mb-4 mb-lg-0" key={index}>
                 <Clock timeZone={value.timeZone} label={value.label} />
               </div>
             ))}
           </div>
           <div className="row">
-            {list?.secondRow?.map((value: ITimeZone, index: number) => (
+            {list?.secondRow?.map((value: CountryDetails, index: number) => (
               <div className="col-lg-6 col-12 mb-4 mb-lg-0" key={index}>
                 <Clock timeZone={value.timeZone} label={value.label} />
               </div>
             ))}
           </div>
           <div className="row">
-            {list?.thirdRow?.map((value: ITimeZone, index: number) => (
+            {list?.thirdRow?.map((value: CountryDetails, index: number) => (
               <div className="col" key={index}>
                 <Clock timeZone={value.timeZone} label={value.label} />
               </div>
