@@ -9,6 +9,8 @@ interface GlobalSettingContextReturnType {
   isFetchingCountryList: boolean;
   defaultHomeTimezone: ClockListRowType;
   storeHomeTimezoneData: (data: string | ClockListRowType) => void;
+  localStorageData: ClockListRowType;
+  removeLocalStorage: () => void;
 }
 
 const GlobalSettingContext = React.createContext<GlobalSettingContextReturnType>({} as GlobalSettingContextReturnType);
@@ -22,7 +24,7 @@ export const GlobalSettingProvider = ({ children }: React.PropsWithChildren<any>
   const [isFetchingCountryList, setIsFetchingCountryList] = React.useState<boolean>(true);
   const [defaultHomeTimezone, setDefaultHomeTimezone] = React.useState<ClockListRowType>({ firstRow: firstRowTimeZone, secondRow: secondRowTimeZone, thirdRow: thirdRowTimeZone });
 
-  const { localStorageData, storeData } = useLocalStorage("preference-clock-list", true);
+  const { localStorageData, storeData, removeLocalStorage } = useLocalStorage("preference-clock-list", true);
 
   React.useEffect(() => {
     axios
@@ -42,6 +44,17 @@ export const GlobalSettingProvider = ({ children }: React.PropsWithChildren<any>
   }, [localStorageData]);
 
   return (
-    <GlobalSettingContext.Provider value={{ countryList, isFetchingCountryList, defaultHomeTimezone, storeHomeTimezoneData: storeData }}>{children}</GlobalSettingContext.Provider>
+    <GlobalSettingContext.Provider
+      value={{
+        countryList,
+        isFetchingCountryList,
+        defaultHomeTimezone,
+        storeHomeTimezoneData: storeData,
+        localStorageData: localStorageData as ClockListRowType,
+        removeLocalStorage,
+      }}
+    >
+      {children}
+    </GlobalSettingContext.Provider>
   );
 };
