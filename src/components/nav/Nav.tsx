@@ -4,6 +4,7 @@ import "./nav.scss";
 import Sidebar from "../sidebar/Sidebar";
 import { IoMdSettings } from "react-icons/io";
 import { usePreferenceSettingContext } from "../../context/PreferenceSettingContext";
+import classNames from "classnames";
 
 const Nav = () => {
   const { theme, setTheme } = useThemeContext();
@@ -51,7 +52,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg px-3 ${theme.nav} ${theme.text}`}>
+    <nav className={classNames("navbar navbar-expand-lg px-3", theme.nav, theme.text)}>
       <div className="container-fluid">
         <div className="navbar-brand">
           <div className="row align-items-center ">
@@ -64,7 +65,7 @@ const Nav = () => {
         <div className="nav-tools">
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onChange={toggle} checked={checkedBox} />
-            <label className={`form-check-label ${theme.text}`} htmlFor="flexSwitchCheckDefault">
+            <label className={classNames("form-check-label", theme.text)} htmlFor="flexSwitchCheckDefault">
               Theme mode
             </label>
           </div>

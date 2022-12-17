@@ -2,6 +2,7 @@ import React from "react";
 import { useThemeContext } from "../../context/ThemeContext";
 import { CountryDetails } from "../../types/CountryDetails.type";
 import Clock from "../clock/Clock";
+import className from "classnames";
 
 export interface ClockListRowType {
   firstRow: CountryDetails[];
@@ -17,7 +18,7 @@ const ClockList: React.FC<ClockListProps> = ({ list }) => {
   const { theme } = useThemeContext();
 
   return (
-    <div className={`container-fluid p-2 h-100 ${theme.bgBody} my-home-container`}>
+    <div className={className("container-fluid p-2 h-100 my-home-container", theme.bgBody)}>
       <div className="container my-home">
         <div className="row gap-lg-4 gap-0 justify-content-center mb-my-0 my-3 ">
           <div className="row">

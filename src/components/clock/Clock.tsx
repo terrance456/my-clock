@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useThemeContext } from "../../context/ThemeContext";
 import { timeConverter } from "../../helperFunctions/helperFunction";
+import className from "classnames";
 import "./clock.scss";
 
 export interface IClockProps {
@@ -18,7 +19,7 @@ export const Clock = (props: IClockProps) => {
   }, [props]);
 
   return (
-    <div className={`card d-flex justify-content-center ${theme.card} ${theme.text} align-items-center shadow clock-card `}>
+    <div className={className("card d-flex justify-content-center align-items-center shadow clock-card", theme.card, theme.text)}>
       <div className="card-body d-flex flex-column justify-content-center align-items-center">
         <h1 className="my-time mb-0">{timeDisplay}</h1>
         <label htmlFor="">{props.label}</label>

@@ -8,6 +8,7 @@ import { ClockListRowType } from "../ClockList/ClockList";
 import CountryBadge from "../country-badge/CountryBadge";
 import CountryCard from "../countryCard/CountryCard";
 import Modal, { ModalProps } from "../modal/Modal";
+import classNames from "classnames";
 import "./preference-setting-modal.scss";
 
 export interface PreferenceSettingModalProps extends ModalProps {}
@@ -79,7 +80,7 @@ const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: Pr
         <AiOutlineClose onClick={props.onModalClose} />
       </div>
       <div className="custom-modal-body">
-        <div className={`country-badges-wrapper ${theme.nav}`}>
+        <div className={classNames("country-badges-wrapper", theme.nav)}>
           <div className="country-badges-container">
             {pickedTimezone.map((timezone: CountryDetails, index: number) => (
               <CountryBadge key={index} type={theme.bgBody === "bg-dark" ? "bg-light" : "bg-dark"} text={timezone.label} onClose={() => onClickCloseBadge(index)} />
@@ -89,7 +90,7 @@ const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: Pr
             value={countryNameInput}
             onChange={onChangeCountryName}
             type="text"
-            className={`form-control ${theme.nav} ${theme.text} size-sm`}
+            className={classNames("form-control size-sm", theme.nav, theme.text)}
             placeholder="Eg: Kuala Lumpur"
             disabled={isFetchingCountryList}
           />

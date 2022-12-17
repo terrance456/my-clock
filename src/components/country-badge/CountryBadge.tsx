@@ -1,5 +1,6 @@
 import React from "react";
 import "./country-badge.scss";
+import className from "classnames";
 
 interface CountryBadgeProps {
   type: "bg-light" | "bg-dark";
@@ -9,8 +10,8 @@ interface CountryBadgeProps {
 
 const CountryBadge: React.FC<CountryBadgeProps> = (props: CountryBadgeProps) => {
   return (
-    <span className={`country-badge badge bg-secondary `}>
-      {props.text} <button type="button" className={`btn-close ${props.type === "bg-dark" ? "btn-close-white" : ""}`} onClick={props.onClose} />
+    <span className="country-badge badge bg-secondary">
+      {props.text} <button type="button" className={className("btn-close", { "btn-close-white": props.type === "bg-dark" })} onClick={props.onClose} />
     </span>
   );
 };
