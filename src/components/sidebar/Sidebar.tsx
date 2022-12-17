@@ -8,6 +8,7 @@ import { formatDataCountryLabels, splitDataIntoChunks } from "../../utils";
 import { DetectScrollEnd } from "../../hooks/detectScrollEnd";
 import { useGlobalSettingContext } from "../../context/GlobalSettingContext";
 import { CountryDetails } from "../../types/CountryDetails.type";
+import classNames from "classnames";
 
 export const Sidebar = () => {
   const { theme } = useThemeContext();
@@ -97,12 +98,12 @@ export const Sidebar = () => {
       <div className="sidebar-toggle" onClick={toggleSidebar}>
         <GiHamburgerMenu />
       </div>
-      <div className={`sidebar-content ${openSidebar ? "open-sidebar" : ""} ${theme.nav}`}>
+      <div className={classNames("sidebar-content", { "open-sidebar": openSidebar }, theme.nav)}>
         <label className="mb-3">Search prefable timezone</label>
         <form className="w-100 mb-3" onSubmit={onSubmit}>
           <input
             type="text"
-            className={`form-control ${theme.nav} ${theme.text} size-sm`}
+            className={classNames("form-control size-sm", theme.nav, theme.text)}
             value={countryNameInput}
             onChange={countryNameInputOnChange}
             placeholder="Eg: Kuala Lumpur"
