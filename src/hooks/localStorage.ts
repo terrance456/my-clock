@@ -9,6 +9,11 @@ export function useLocalStorage<T extends ClockListRowType | string>(key: string
     setLocalStorageData(data);
   };
 
+  const removeLocalStorage = () => {
+    setLocalStorageData(undefined);
+    window.localStorage.removeItem(key);
+  };
+
   React.useEffect(() => {
     if (window.localStorage.getItem(key)) {
       setLocalStorageData(isJSON ? JSON.parse(window.localStorage.getItem(key) as string) : window.localStorage.getItem(key));
@@ -17,5 +22,5 @@ export function useLocalStorage<T extends ClockListRowType | string>(key: string
     setLocalStorageData(undefined);
   }, [key, isJSON]);
 
-  return { storeData, localStorageData };
+  return { storeData, localStorageData, removeLocalStorage };
 }
