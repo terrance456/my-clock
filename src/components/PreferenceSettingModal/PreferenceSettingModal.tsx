@@ -12,9 +12,11 @@ import "./preference-setting-modal.scss";
 
 export interface PreferenceSettingModalProps extends ModalProps {}
 
+type ClockListRowKeyType = keyof ClockListRowType;
+
 const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: PreferenceSettingModalProps) => {
   const { theme } = useThemeContext();
-  const { countryList, isFetchingCountryList, storeHomeTimezoneData } = useGlobalSettingContext();
+  const { countryList, isFetchingCountryList, localStorageData, storeHomeTimezoneData, removeLocalStorage } = useGlobalSettingContext();
   const [pickedTimezone, setPickedTimezone] = React.useState<CountryDetails[]>([]);
   const [countryNameInput, setCountryNameInput] = React.useState<string>("");
   const restructuredCountryList: CountryDetails[] = React.useMemo(() => formatDataCountryLabels(countryList), [countryList]);
@@ -41,15 +43,29 @@ const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: Pr
 
   const onClickCloseBadge = (index: number) => {
     const newPickedTimezone: CountryDetails[] = [...pickedTimezone];
-    setPickedTimezone([...newPickedTimezone.slice(0, index), ...newPickedTimezone.slice(index + 1)]);
+    const removedTimezone: CountryDetails[] = [...newPickedTimezone.slice(0, index), ...newPickedTimezone.slice(index + 1)];
+    if (removedTimezone.length === 0 && localStorageData) {
+      removeLocalStorage();
+    }
+    setPickedTimezone(removedTimezone);
   };
 
   const onSave = () => {
     if (pickedTimezone.length === 6) {
       const restructurePickedTimezone: ClockListRowType = { firstRow: pickedTimezone.slice(0, 3), secondRow: pickedTimezone.slice(3, 5), thirdRow: pickedTimezone.slice(5) };
       storeHomeTimezoneData(restructurePickedTimezone);
+      return;
     }
   };
+
+  React.useEffect(() => {
+    if (localStorageData) {
+      const flatLocalDataCountryDetails: CountryDetails[] = (Object.keys(localStorageData) as Array<ClockListRowKeyType>)
+        .map((key: ClockListRowKeyType) => localStorageData[key])
+        .flat();
+      setPickedTimezone(flatLocalDataCountryDetails);
+    }
+  }, [localStorageData]);
 
   return (
     <Modal toggle={props.toggle} onModalClose={props.onModalClose} className="preference-setting-modal">
@@ -57,7 +73,7 @@ const PreferenceSettingModal: React.FC<PreferenceSettingModalProps> = (props: Pr
         <div>
           <h4 className="mb-0">Prefered timezone</h4>
           <div>
-            <small>This changes will be refleted in homepage</small>
+            <small>This changes will be reflected in homepage</small>
           </div>
         </div>
         <AiOutlineClose onClick={props.onModalClose} />
