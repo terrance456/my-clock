@@ -1,6 +1,7 @@
 @mixin country-list-container() {
   .country-card-container {
     overflow-y: auto;
+    @include custom-scroll-bar();
     .country-card-bg-dark {
       background-color: $gray-800;
     }
@@ -23,5 +24,21 @@
         transition: color 0.3s ease;
       }
     }
+  }
+}
+
+@mixin custom-scroll-bar() {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 1rem;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }

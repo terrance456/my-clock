@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
 @import "~bootstrap/scss/mixins/_breakpoints";
+@import "../../mixins.scss";
 
 $modal-width: 400px;
 
@@ -41,6 +42,7 @@ $modal-width: 400px;
       height: 100%;
       padding: 1rem;
       overflow-y: auto;
+      @include custom-scroll-bar();
     }
     > .custom-modal-footer {
       border-top: 1px solid $gray-300;
